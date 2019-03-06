@@ -19,16 +19,15 @@
  * @return {number}
  */
 var removeDuplicates = function(nums) {  
-  if(!nums || nums.length === 0) {
+  let len = nums.length
+  if(!nums || len === 0) {
     return 0;
   }
   
   let swapInd = 0;
   
-  for(let i = 0; i < nums.length-1; i++) { 
-    if(nums[swapInd] === nums[i+1]) { 
-      continue;
-    } else { 
+  for(let i = 0; i < len-1; i++) { 
+    if(nums[swapInd] !== nums[i+1]) { 
       swapInd++;
       let temp = nums[swapInd];
       nums[swapInd] = nums[i+1];
