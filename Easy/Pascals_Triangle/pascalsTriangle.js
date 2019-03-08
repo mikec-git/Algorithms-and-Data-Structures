@@ -22,18 +22,17 @@ var generate = function(numRows) {
     return [];
   }
   
-  const pascals = [];
+  const pascals = [[1]];
   
-  for(let i = 1; i <= numRows; i++) {
-    let row = [];
-    for(let j = 0; j < i; j++) {
-      if(j > 0 && j < i-1) {
-        let prevRow = pascals[i-2];
-        row.push(prevRow[j] + prevRow[j-1]);
-      } else {
-        row.push(1);
-      }
+  for(let i = 1; i < numRows; i++) {
+    let row = [1];
+    let prevRow = pascals[i-1];
+    
+    for(let j = 1; j < i; j++) {
+      row.push(prevRow[j] + prevRow[j-1]);
     }
+    
+    row.push(1);
     pascals.push(row);
   }
   
