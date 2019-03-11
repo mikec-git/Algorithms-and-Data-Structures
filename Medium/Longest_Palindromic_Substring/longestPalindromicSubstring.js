@@ -43,6 +43,7 @@ var longestPalindrome = function(s) {
         last <= 1 && s[first] === s[first+last]) {
         memo[first][first+last] = true;
         
+        // first + last - first...
         if(last > stringEnd - stringStart) {
           stringStart = first;
           stringEnd = first+last;
