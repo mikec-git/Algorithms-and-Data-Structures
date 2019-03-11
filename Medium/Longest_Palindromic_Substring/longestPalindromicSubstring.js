@@ -10,7 +10,7 @@ var longestPalindrome = function(s) {
   let maxSubString = '';
   
   for(let i = 0; i < s.length; i++) {
-    // Accounts for even substrings like baab (bb)
+    // Accounts for even substrings like baab (aa)
     for(let j = 0; j < 2; j++) {
       let left = i;
       let right = i + j;
