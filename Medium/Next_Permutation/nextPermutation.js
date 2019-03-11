@@ -16,49 +16,26 @@ var nextPermutation = function(nums) {
     return nums;
   }
   
-  let maxOrder = true;
-  for(let i = 1; i < nums.length; i++) {
-    if(nums[i] > nums[i-1]) {
-      maxOrder = false;
-      break;
-    }
-  }
-  
-  if(maxOrder) {
-    for(let i = 1; i < nums.length; i++) {
-      let hole = i;
-      let val = nums[i];
-      
-      while(hole > 0 && nums[hole-1] > val) {
-        nums[hole] = nums[hole-1];
-        hole--;
-      }
-      
-      nums[hole] = val;
-    }    
-    return;
-  }
-  
-  for(let i = nums.length-1; i > 0; i--) {
-    if(nums[i-1] < nums[i]) {
+  for(let i = nums.length-1; i >= 0; i--) {
+    if(i === 0 || i > 0 && nums[i-1] < nums[i]) {
       let ind = i;
+      // Account for case where array is reverse-sorted
+      let swapInd = i > 0 ? i-1 : 0;
+      let endInd = i > 0 ? nums.length : nums.length-1;
       
       while(ind < nums.length) {
-        if(nums[ind+1] <= nums[i-1] || ind === nums.length-1) {
-          let temp = nums[i-1];
-          nums[i-1] = nums[ind];
+        if(i > 0 && nums[ind+1] <= nums[swapInd] || ind === nums.length-1) {
+          let temp = nums[swapInd];
+          nums[swapInd] = nums[ind];
           nums[ind] = temp;
           break;
         }
         ind++;
-      }
+      }      
       
-      ind = i-1;
-      let endInd = nums.length;
-      
-      while(++ind < --endInd) {
-        let temp = nums[ind];
-        nums[ind] = nums[endInd];
+      while(++swapInd < --endInd) {
+        let temp = nums[swapInd];
+        nums[swapInd] = nums[endInd];
         nums[endInd] = temp;
       }      
       return;
