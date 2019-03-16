@@ -39,9 +39,8 @@ var isCousins = function(root, x, y) {
     let len = queue.length;
     let count = 2;
     
-    while(len > 0) {
+    while(len-- > 0) {
       let node = queue.shift();
-      len--;
       if(!node) continue;
       if(node.left && (node.left.val === x || node.left.val === y) || 
          node.right && (node.right.val === x || node.right.val === y)) count--;
