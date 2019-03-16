@@ -37,41 +37,31 @@ var numRookCaptures = function(board) {
   for(let i = 0; i < 8; i++) {
     for(let j = 0; j < 8; j++) {
       if(board[i][j] === 'R') {
-        let count = 1;
-        while(i-count > 0 && i-count < 8 && board[i-count][j] !== 'B') {
-          if(board[i-count][j] === 'B') break;
-          else if(board[i-count][j] === 'p') {
-            captured++; 
-            break;
-          }
-          count++;
+        let tempI = i;
+        let tempJ = j;
+        for(let k = -1; k < 2; k+=2) {
+          i = tempI;
+          while(i+k > 0 && i+k < 8 && board[i+k][j] !== 'B') {
+            i+=k;
+            if(board[i][j] === 'B') break;
+            else if(board[i][j] === 'p') {
+              captured++; 
+              break;
+            }
+          }          
         }
-        count = 1;
-        while(i+count > 0 && i+count < 8 && board[i+count][j] !== 'B') {
-          if(board[i+count][j] === 'B') break;
-          else if(board[i+count][j] === 'p') {
-            captured++; 
-            break;
-          }
-          count++;
-        }
-        count = 1;
-        while(j-count > 0 && j-count < 8 && board[i][j-count] !== 'B') {
-          if(board[i][j-count] === 'B') break;
-          else if(board[i][j-count] === 'p') {
-            captured++; 
-            break;
-          }
-          count++;
-        }
-        count = 1;
-        while(j+count > 0 && j+count < 8 && board[i][j+count] !== 'B') {
-          if(board[i][j+count] === 'B') break;
-          else if(board[i][j+count] === 'p') {
-            captured++; 
-            break;
-          }
-          count++;
+        
+        i = tempI;
+        for(let k = -1; k < 2; k+=2) {
+          j = tempJ;
+          while(j+k > 0 && j+k < 8 && board[i][j+k] !== 'B') {
+            j+=k;
+            if(board[i][j] === 'B') break;
+            else if(board[i][j] === 'p') {
+              captured++; 
+              break;
+            }
+          }          
         }
         break;
       }
