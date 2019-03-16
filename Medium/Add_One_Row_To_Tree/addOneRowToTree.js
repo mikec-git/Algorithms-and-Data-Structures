@@ -74,32 +74,22 @@ var addOneRow = function(root, v, d) {
   while(queue.length > 0) {
     let queueLen = queue.length;
     
-    while(queueLen > 0) {
+    while(queueLen-- > 0) {
       let next = queue.shift();
       
+      if(!next) continue;      
       if(depth === d-1) {
         let node = new TreeNode(v);
-        
-        if(next.left) {
-          node.left = next.left;
-          next.left = node;
-        } else {
-          next.left = node;
-        }
+        node.left = next.left;
+        next.left = node;
         
         node = new TreeNode(v);
-        if(next.right) {
-          node.right = next.right;
-          next.right = node;
-        } else {
-          next.right = node;
-        }
+        node.right = next.right;
+        next.right = node;
       } else {
-        next.right && queue.push(next.right);
-        next.left && queue.push(next.left);        
+        queue.push(next.right);
+        queue.push(next.left);        
       }      
-      
-      queueLen--;
     }
     
     if(depth === d-1) return root;
