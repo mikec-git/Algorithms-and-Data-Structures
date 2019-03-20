@@ -25,18 +25,15 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var rotate = function(nums, k) {
-  reverse(nums, 0, nums.length);
-  reverse(nums, 0, k % nums.length);
-  reverse(nums, k % nums.length, nums.length);
+  reverse(nums, 0, nums.length-1);
+  reverse(nums, 0, k % nums.length - 1);
+  reverse(nums, k % nums.length, nums.length-1);
 };
 
 const reverse = (nums, start, end) => {
-  let mid = nums%2 === 0 ? Math.floor((end+start)/2) - 1 : Math.floor((end+start)/2);
-  
-  for(let i = start; i < mid; i++) { 
+  while(start < end) {
+    [nums[start], nums[end]] = [nums[end], nums[start]];
+    start++;
     end--;
-    let temp = nums[end];
-    nums[end] = nums[i];
-    nums[i] = temp;
   }
 }
