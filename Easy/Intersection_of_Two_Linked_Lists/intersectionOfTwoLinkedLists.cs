@@ -48,24 +48,22 @@ public class Solution {
       bCount++;
     }
     
-    ListNode start = null;
     var count = -1;
     while(headA != null && headB != null) {
       count++;
-      if(bCount > aCount && count < bCount - aCount) {
+      if(count < bCount - aCount && bCount > aCount) {
         headB = headB.next;
         continue;          
-      } else if(aCount >= bCount && count < aCount - bCount) {
+      } else if(count < aCount - bCount && aCount >= bCount) {
         headA = headA.next;
         continue; 
       }
-      if(start == null && headA == headB) start = headA;
-      else if(start != null && headA != headB) start = null;
+      if(headA == headB) return headA;
       headA = headA.next;
       headB = headB.next;
     }
     
-    return start;
+    return null;
   }
 }
 
