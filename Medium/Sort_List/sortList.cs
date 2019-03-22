@@ -16,6 +16,58 @@
  *     public ListNode(int x) { val = x; }
  * }
  */
+
+public class Solution {
+  public ListNode SortList(ListNode head) {
+    if(head != null && head.next != null) {
+      var leftH = head; // Leftmost head - Smallest
+      var rightH = default(ListNode); // Rightmost head - Largest
+      var midH = default(ListNode); // For repeating nodes with head
+      var current = head.next;      
+      head.next = null;
+      
+      while(current != null) {
+        var temp = current.next;
+        if(current.val < head.val) {
+          // Attach current to before left head node and set current to new left head
+          current.next = leftH;
+          leftH = current;
+        } else if(current.val > head.val) {
+          // Attach current to before right head node and set current to new right head
+          current.next = rightH;
+          rightH = current;
+        } else {
+          // Attach repeating node to its own list
+          current.next = midH;
+          midH = current;
+        }
+        current = temp;
+      }
+          
+      leftH = SortList(leftH);
+      rightH = SortList(rightH);
+        
+      if(midH != null) {
+        // At this point, head is the last node of the "left" list, so connect with repeating mid node
+        head.next = midH;
+        // Set head ref to mid node and loop until end
+        head = midH;
+        while(head.next != null) {
+          head = head.next;
+        }
+      }
+      // Attach "right" list with end of head (after left or mid)
+      head.next = rightH;
+      // Reset head to the smallest "left" list node (since left list is still connected to the original head)
+      head = leftH;      
+    }
+    
+    return head;
+  }
+}
+
+ // OR Merge list
+
 public class Solution {
   public ListNode SortList(ListNode head) {
     if(head == null || head.next == null) return head;
