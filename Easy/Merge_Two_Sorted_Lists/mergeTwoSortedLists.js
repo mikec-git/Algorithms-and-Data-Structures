@@ -24,16 +24,12 @@ var mergeTwoLists = function(l1, l2) {
   
   while(l1 || l2) { 
     if(l1 && l2) {
-      
       tempList.val = l1.val <= l2.val ? l1.val : l2.val;          
       tempList.next = new ListNode(null);
       tempList = tempList.next;      
       
-      if(l1.val <= l2.val) { 
-        l1 = l1.next;
-      } else {        
-        l2 = l2.next;        
-      }      
+      if(l1.val <= l2.val) l1 = l1.next;
+      else l2 = l2.next;
     } else if(l1) {
       tempList.val = l1.val;
       
