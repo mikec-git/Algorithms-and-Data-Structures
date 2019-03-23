@@ -25,21 +25,11 @@
  * @return {number}
  */
 var minDepth = function(root) {
-  if(!root) {
-    return 0;
-  }
+  if(!root) return 0;  
+  if(!root.right && !root.left) return 1;
   
-  if(!root.right && !root.left) {
-    return 1;
-  }
-  
-  if(!root.right) {
-    return minDepth(root.left) + 1;
-  }
-  
-  if(!root.left) {
-    return minDepth(root.right) + 1;
-  } 
+  if(!root.right) return minDepth(root.left) + 1;  
+  if(!root.left) return minDepth(root.right) + 1;
   
   return 1 + Math.min(minDepth(root.left), minDepth(root.right));
 };
@@ -47,22 +37,16 @@ var minDepth = function(root) {
 // OR 
 
 var minDepth = function(root) {
+  if(!root) return 0;
   let result;  
-  if(!root) {
-    return 0;
-  }
 
   function getMinDepth(node, depth) {    
     if(!node.left && !node.right) { 
       result = Math.min(depth, result || depth);
     }
     
-    if(node.left) {
-      getMinDepth(node.left, depth + 1);
-    }
-    if(node.right) {
-      getMinDepth(node.right, depth + 1);
-    }
+    if(node.left) getMinDepth(node.left, depth + 1);
+    if(node.right) getMinDepth(node.right, depth + 1);
   }
   
   getMinDepth(root, 1);
