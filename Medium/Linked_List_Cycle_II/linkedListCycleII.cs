@@ -39,19 +39,18 @@ public class Solution {
     
     var slow = head;
     var fast = head;
-    do {
+    while(slow != null && fast != null) {
       slow = slow.next;
+      if(fast.next == null) return null;
       fast = fast.next.next;
-    } while(slow != null && fast != null && fast.next != null && slow != fast);
+      if(slow == fast) break;
+    }    
+    
     if(slow == null || fast == null) return null;
-    
-    
-    fast = head;
-    
+    fast = head;    
     while(fast != slow) {
       fast = fast.next;
       slow = slow.next;
-      if(fast == null || slow == null) return null;
     }
     
     return slow;
