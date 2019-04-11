@@ -17,7 +17,7 @@ public class Solution {
   public int FindKthLargest(int[] nums, int k) {
     capacity = nums.Length;
     BuildMaxHeap(nums);
-    ExtractMax(nums);
+    HeapSort(nums);
     return nums[capacity-k];    
   }
   
@@ -41,8 +41,8 @@ public class Solution {
     }
   }
   
-  public void ExtractMax(int[] nums) {
-    for(var i = capacity-1; i >= 0; i--) {
+  public void HeapSort(int[] nums) {
+    for(var i = capacity-1; i >= 1; i--) {
       Swap(nums, 0, i);
       MaxHeapify(nums, 0, i);
     }
@@ -54,3 +54,53 @@ public class Solution {
     nums[j] = temp;
   }
 }
+
+// OR (JS)
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+
+// const findKthLargest = function(nums, k) {
+//   quickSelect(nums, nums.length-k, 0, nums.length-1);
+//   return nums[nums.length-k];
+// };
+
+// const quickSelect = (nums, k, lo, hi) => {
+//   if(lo >= hi) return nums[lo];
+  
+//   let rand = Math.floor(Math.random()*(hi-lo+1)) + lo;
+//   swap(nums, rand, hi);
+  
+//   let pInd = partition(nums, lo, hi);
+  
+//   if(pInd === k) {
+//     return nums[k];
+//   } else if(pInd > k) {
+//     return quickSelect(nums, k, lo, pInd-1);
+//   } else {
+//     return quickSelect(nums, k, pInd+1, hi);
+//   }
+// };
+
+// const partition = (nums, lo, hi) => {
+//   let pivot = nums[hi];
+//   let pInd = lo;
+  
+//   for(let i = lo; i < hi; i++) {
+//     if(nums[i] <= pivot) {
+//       swap(nums, i, pInd);
+//       pInd++;
+//     }
+//   }
+  
+//   swap(nums, pInd, hi);
+  
+//   return pInd;
+// };
+
+// const swap = (arr, i, j) => {
+//   [arr[i], arr[j]] = [arr[j], arr[i]];
+// };
